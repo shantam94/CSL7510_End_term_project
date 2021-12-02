@@ -2,19 +2,23 @@ version: '3.7'
 services:
   telegraf:
     image: telegraf:latest
+    # Image source: https://hub.docker.com/r/library/telegraf/tags/
     configs:
     - source: telegraf-conf
       target: /etc/telegraf/telegraf.conf
     ports:
     - 8186:8186
   influxdb:
+  # Image source: https://hub.docker.com/r/library/influxdb/tags/
     image: influxdb:1.8
   chronograf:
+   # Image source: https://hub.docker.com/r/library/chronograf/tags/
     image: chronograf:latest
     ports:
     - 8888:8888
     command: ["chronograf", "--influxdb-url=http://influxdb:8086"]
   kapacitor:
+  # Image source: https://hub.docker.com/r/library/kapacitor/tags/
     image: kapacitor:latest
     environment:
     - KAPACITOR_INFLUXDB_0_URLS_0=http://influxdb:8086
